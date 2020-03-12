@@ -5,6 +5,8 @@ mysql5.7.27源文件太大暂未上传
 wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz  
 后 chmod -R 777 lamp_auto_config  
 再 ./lamp_auto_config 执行shell脚本  
+lamp环境会自动安装配置完成，  
+自动运行php文件，输出success则安装配置完成  
 test.php文件验证apache是否正确加载php模块  
 test2.php文件验证php访问mysql是否成功  
 源文件百度网盘地址  
