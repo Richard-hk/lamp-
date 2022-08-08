@@ -33,14 +33,14 @@ sed -i '/\[mysqld\]/a\skip-grant-tables' /etc/my.cnf
 service mysql restart
 ./mysql -uroot << EOF
 flush privileges;
-alter user 'root'@'localhost' identified by 'Kh@666666';
+alter user 'root'@'localhost' identified by '123456';
 exit
 EOF
 sed -i 's/skip-grant-tables/#&/g' /etc/my.cnf
 service mysql restart
-./mysql -uroot -pKh@666666 << EOF
+./mysql -uroot -p123456 << EOF
 update mysql.user set host='%' where user='root';
-grant all privileges on *.* to 'root'@'%' identified by 'Kh@666666' with grant option;
+grant all privileges on *.* to 'root'@'%' identified by '123456' with grant option;
 flush privileges;
 exit
 EOF
@@ -140,13 +140,13 @@ sed -i '/AddType application\/x-httpd-php .php/a\AddType application\/x-httpd-so
 sed -i '/php7_module/a\PhpIniDir \/usr\/local\/php\/etc' /usr/local/httpd/conf/httpd.conf
 sed -i 's/DirectoryIndex index.html/& index.php/g' /usr/local/httpd/conf/httpd.conf
 service httpd restart
-cp /root/test.php /usr/local/httpd/htdocs/
-cp /root/test2.php /usr/local/httpd/htdocs/
+cp /root/test_apache_success.php /usr/local/httpd/htdocs/
+cp /root/test_mysql_con_success.php /usr/local/httpd/htdocs/
 service mysql restart
 service httpd restart
 service mysql restart
-curl 127.0.0.1/test.php
-curl 127.0.0.1/test2.php 
+curl 127.0.0.1/test_apache_success.php
+curl 127.0.0.1/test_mysql_con_success.php 
 firewall-cmd --add-port=80/tcp --permanent
 firewall-cmd --reload
 
